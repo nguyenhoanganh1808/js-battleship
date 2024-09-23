@@ -1,3 +1,4 @@
+import { experiments } from 'webpack';
 import GameBoard from '../application_logic/game_board';
 import Ship from '../application_logic/ship';
 
@@ -50,23 +51,27 @@ describe('game board', () => {
     expect(board.placeShip(newShip, 1, 3)).toBe(false);
   });
 
-  // test('display vertical', () => {
-  //   const board = GameBoard();
-  //   board.createBoard();
-  //   board.placeMode = 'vertical';
+  test('display vertical', () => {
+    const board = GameBoard();
+    board.createBoard();
+    board.setPlaceMode('vertical');
+    const newShip = Ship(3);
 
-  //   const newShip = Ship(3);
-  //   board.placeShip(newShip, 0, 0);
-  //   expect(board.placeShip(newShip, 0, 0)).toBe(false);
-  //   expect(board.placeShip(newShip, 0, 1)).toBe(false);
-  //   expect(board.placeShip(newShip, 8, 1)).toBe(false);
-  // });
+    board.placeShip(newShip, 0, 0);
+    expect(board.placeShip(newShip, 0, 0)).toBe(false);
+    expect(board.placeShip(newShip, 0, 1)).toBe(false);
+    expect(board.placeShip(newShip, 8, 4)).toBe(false);
+  });
 
-  // test('get and set place mode', () => {
-  //   const board = GameBoard();
-  //   board.createBoard();
+  test('get and set place mode', () => {
+    const board = GameBoard();
+    board.createBoard();
 
-  // })
+    board.placeMode = 'vertical';
+    expect(board.placeMode).toMatch('vertical');
+    board.placeMode = 'horizontal';
+    expect(board.placeMode).toMatch('horizontal');
+  });
 
   test('receive attack', () => {
     const board = GameBoard();
@@ -78,7 +83,6 @@ describe('game board', () => {
 
     expect(board.receiveAttack(0, 0)).toBe('hit');
     expect(board.receiveAttack(1, 0)).toBe('miss');
-    expect(board.getBoard()[0][0]).toBe('hit');
     expect(board.receiveAttack(1, 0)).toBe(false);
 
     board.receiveAttack(0, 1);
@@ -94,6 +98,13 @@ describe('game board', () => {
     const ship1 = Ship(3);
     const ship2 = Ship(1);
     board.placeShip(ship1, 0, 0);
-    board.placeShip(ship1, 1, 0);
+    board.placeShip(ship1, 3, 0);
+
+    ship1.hit();
+    ship1.hit();
+    ship1.hit();
+    ship2.hit();
+
+    expect(board.isGameOver()).toBe(true);
   });
 });

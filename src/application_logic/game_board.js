@@ -49,7 +49,6 @@ export default function GameBoard() {
 
   function checkPlaceShipVertical(ship, row, col) {
     let shipLength = ship.getLength();
-
     if (shipLength > rows - row) {
       return false;
     }
@@ -92,7 +91,6 @@ export default function GameBoard() {
         board[row][j] = ship;
       }
     } else {
-      console.log('here');
       if (!checkPlaceShipVertical(ship, row, col)) return false;
 
       for (let i = row; i < rows; i++) {
@@ -109,12 +107,22 @@ export default function GameBoard() {
       return false;
     } else {
       board[row][col].hit();
-      board[row][col] = 'hit';
-      return board[row][col];
+      return 'hit';
     }
   };
 
   const setPlaceMode = (newPlaceMode) => (placeMode = newPlaceMode);
+
+  const isGameOver = () => {
+    board.forEach((row) => {
+      row.forEach((cell) => {
+        if (cell !== '' && cell !== 'miss' && !cell.isSunk()) {
+          return false;
+        }
+      });
+    });
+    return true;
+  };
 
   return {
     getBoard,
@@ -123,5 +131,6 @@ export default function GameBoard() {
     placeShip,
     setPlaceMode,
     receiveAttack,
+    isGameOver,
   };
 }
