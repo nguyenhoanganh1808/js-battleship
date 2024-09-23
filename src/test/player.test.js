@@ -10,4 +10,12 @@ describe('player', () => {
 
     expect(player.getType()).toMatch('real');
   });
+
+  test('each player should contain their own game board', () => {
+    const player1 = Player('real');
+    const player2 = Player('computer');
+
+    expect(player1.gameBoard).toBeDefined();
+    expect(player2.gameBoard).toBeDefined();
+  });
 });
