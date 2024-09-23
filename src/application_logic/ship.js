@@ -5,6 +5,7 @@ export default function Ship(length) {
   }
 
   const getNumOfHit = () => numOfHit;
+  const getLength = () => length;
 
   const hit = () => {
     numOfHit += 1;
@@ -12,5 +13,5 @@ export default function Ship(length) {
 
   const isSunk = () => numOfHit >= length;
 
-  return { getNumOfHit, isSunk, hit };
+  return { getLength, getNumOfHit, isSunk, hit };
 }
