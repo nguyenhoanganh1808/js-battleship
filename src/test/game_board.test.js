@@ -105,6 +105,6 @@ describe('game board', () => {
     ship1.hit();
     ship2.hit();
 
-    expect(board.isGameOver()).toBe(true);
+    expect(board.isAllShipSunk()).toBe(true);
   });
 });

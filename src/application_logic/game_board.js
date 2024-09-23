@@ -113,7 +113,7 @@ export default function GameBoard() {
 
   const setPlaceMode = (newPlaceMode) => (placeMode = newPlaceMode);
 
-  const isGameOver = () => {
+  const isAllShipSunk = () => {
     board.forEach((row) => {
       row.forEach((cell) => {
         if (cell !== '' && cell !== 'miss' && !cell.isSunk()) {
@@ -131,6 +131,6 @@ export default function GameBoard() {
     placeShip,
     setPlaceMode,
     receiveAttack,
-    isGameOver,
+    isAllShipSunk,
   };
 }
