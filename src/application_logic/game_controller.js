@@ -18,11 +18,14 @@ export default function GameController() {
     }
   };
 
-  // const currentPlayerMadeAMove= () => {
-  //   currentPlayer
-  // }
+  const currentPlayerMadeAMove = (row, col) => {
+    const result = currentPlayer.board.receiveAttack(row, col);
+    changePlayer();
+    return result;
+  };
 
   return {
     createNewGame,
+    currentPlayerMadeAMove,
   };
 }
