@@ -116,7 +116,12 @@ export default function GameBoard() {
   const isAllShipSunk = () => {
     board.forEach((row) => {
       row.forEach((cell) => {
-        if (cell !== '' && cell !== 'miss' && !cell.isSunk()) {
+        if (
+          cell !== '' &&
+          cell !== 'miss' &&
+          cell !== 'hit' &&
+          !cell.isSunk()
+        ) {
           return false;
         }
       });

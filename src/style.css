@@ -199,3 +199,12 @@ button.have-ship {
   height: fit-content;
   padding: 16px 0px;
 }
+
+.player1,
+.player2 {
+  transition: all 1s ease;
+}
+
+.active {
+  transform: scale(1.05);
+}

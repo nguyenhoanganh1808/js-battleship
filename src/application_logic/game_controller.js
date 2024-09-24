@@ -52,10 +52,14 @@ export default function GameController() {
 
   const playRound = (row, col) => {
     const result = inactivePlayer.gameBoard.receiveAttack(row, col);
+
     if (result !== 'hit') {
       changePlayer();
     }
+    return result;
   };
+
+  const getActivePlayer = () => activePlayer;
 
   const isGameOver = () => inactivePlayer.gameBoard.isAllShipSunk();
 
@@ -64,5 +68,6 @@ export default function GameController() {
     getPlayers,
     playRound,
     isGameOver,
+    getActivePlayer,
   };
 }
