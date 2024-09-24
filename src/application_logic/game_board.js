@@ -114,19 +114,17 @@ export default function GameBoard() {
   const setPlaceMode = (newPlaceMode) => (placeMode = newPlaceMode);
 
   const isAllShipSunk = () => {
+    let result = true;
     board.forEach((row) => {
       row.forEach((cell) => {
-        if (
-          cell !== '' &&
-          cell !== 'miss' &&
-          cell !== 'hit' &&
-          !cell.isSunk()
-        ) {
-          return false;
+        if (cell === '' || cell === 'miss' || cell === 'hit') {
+          return;
+        } else if (!cell.isSunk()) {
+          result = false;
         }
       });
     });
-    return true;
+    return result;
   };
 
   return {

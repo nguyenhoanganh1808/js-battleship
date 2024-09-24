@@ -98,10 +98,11 @@ describe('game board', () => {
     const ship1 = Ship(3);
     const ship2 = Ship(1);
     board.placeShip(ship1, 0, 0);
-    board.placeShip(ship1, 3, 0);
+    board.placeShip(ship2, 3, 0);
 
     ship1.hit();
     ship1.hit();
+    expect(board.isAllShipSunk()).toBe(false);
     ship1.hit();
     ship2.hit();
 

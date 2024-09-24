@@ -19,6 +19,7 @@ describe('ship', () => {
 
   test('sunk when length <= num of hit', () => {
     const newShip = Ship(1);
+    expect(newShip.isSunk()).toBe(false);
     newShip.hit();
 
     expect(newShip.isSunk()).toBe(true);

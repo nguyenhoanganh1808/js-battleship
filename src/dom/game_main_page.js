@@ -61,9 +61,8 @@ export default function ScreenController() {
       e.target.dataset.colIndex,
     );
 
-    if (gameController.isGameOver()) {
-      winnerText.textContent = 'You win';
-      return;
+    if (gameController.getActivePlayer().gameBoard.isAllShipSunk()) {
+      console.log('you win');
     }
 
     updateBoards();
@@ -79,9 +78,6 @@ export default function ScreenController() {
 
         if (result !== 'hit' && result !== false) break;
       }
-    }
-    if (gameController.isGameOver()) {
-      winnerText.textContent = 'You lost';
     }
 
     updateBoards();
