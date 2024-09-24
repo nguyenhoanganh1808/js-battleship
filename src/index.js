@@ -1,2 +1,4 @@
-const x = 'wlwfk';
-console.log(x);
+import './style.css';
+import GameMainPage from './dom/game_main_page';
+
+GameMainPage();

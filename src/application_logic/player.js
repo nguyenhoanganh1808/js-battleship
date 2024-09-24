@@ -4,6 +4,7 @@ export default function Player(type, name) {
   const getType = () => type;
 
   const gameBoard = GameBoard();
+  gameBoard.createBoard();
 
   return {
     getType,

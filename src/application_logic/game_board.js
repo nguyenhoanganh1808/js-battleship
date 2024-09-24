@@ -87,13 +87,13 @@ export default function GameBoard() {
     if (placeMode === 'horizontal') {
       if (!checkPlaceShipHorizontal(ship, row, col)) return false;
 
-      for (let j = col; j < columns; j++) {
+      for (let j = col; j < col + ship.getLength(); j++) {
         board[row][j] = ship;
       }
     } else {
       if (!checkPlaceShipVertical(ship, row, col)) return false;
 
-      for (let i = row; i < rows; i++) {
+      for (let i = row; i < row + ship.getLength(); i++) {
         board[i][col] = ship;
       }
     }
@@ -102,13 +102,13 @@ export default function GameBoard() {
   const receiveAttack = (row, col) => {
     if (board[row][col] === '') {
       board[row][col] = 'miss';
-      return 'miss';
     } else if (board[row][col] === 'hit' || board[row][col] === 'miss') {
       return false;
     } else {
       board[row][col].hit();
-      return 'hit';
+      board[row][col] = 'hit';
     }
+    return board[row][col];
   };
 
   const setPlaceMode = (newPlaceMode) => (placeMode = newPlaceMode);
