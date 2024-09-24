@@ -60,14 +60,13 @@ export default function GameController() {
   };
 
   const getActivePlayer = () => activePlayer;
-
-  const isGameOver = () => inactivePlayer.gameBoard.isAllShipSunk();
+  const getInactivePlayer = () => inactivePlayer;
 
   return {
     createNewGame,
     getPlayers,
     playRound,
-    isGameOver,
     getActivePlayer,
+    getInactivePlayer,
   };
 }
