@@ -2,7 +2,7 @@ export default function gameBoard(leftBoard, rightBoard) {
   const alphaBet = 'ABCDEFGHIJ';
   const leftBoardDiv = document.querySelector('.left-board');
   const rightBoardDiv = document.querySelector('.right-board');
-  function updateGameBoard(board, containerDiv) {
+  function updateGameBoard(board, containerDiv, hidden = false) {
     board.forEach((row, i) => {
       if (i === 0) {
         const colIndexText = document.createElement('p');
@@ -24,16 +24,15 @@ export default function gameBoard(leftBoard, rightBoard) {
         button.dataset.rowIndex = i;
         button.dataset.colIndex = j;
 
+        let dot;
         if (cell !== '') {
-          const dot = document.createElement('span');
+          dot = document.createElement('span');
           dot.dataset.rowIndex = i;
           dot.dataset.colIndex = j;
           dot.className = 'dot';
           button.appendChild(dot);
         }
-        // if (cell !== '' && cell !== 'hit' && cell !== 'miss') {
-        //   button.className = 'have-ship';
-        // }
+
         switch (cell) {
           case 'hit':
             button.className = 'hit';
@@ -44,7 +43,13 @@ export default function gameBoard(leftBoard, rightBoard) {
           case '':
             break;
           default:
-            button.className = 'have-ship';
+            {
+              if (!hidden) {
+                button.className = 'have-ship';
+              } else {
+                button.removeChild(dot);
+              }
+            }
             break;
         }
 
@@ -60,7 +65,7 @@ export default function gameBoard(leftBoard, rightBoard) {
     leftBoardDiv.textContent = '';
     rightBoardDiv.textContent = '';
     updateGameBoard(leftBoard, leftBoardDiv);
-    updateGameBoard(rightBoard, rightBoardDiv);
+    updateGameBoard(rightBoard, rightBoardDiv, true);
   }
   updateGameBoards();
 }
