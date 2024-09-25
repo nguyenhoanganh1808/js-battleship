@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>BattleShip</title>
+    <script defer="defer" src="app.bundle.js"></script>
+  </head>
+  <body>
+    <header><h1>BATTLESHIP</h1></header>
+    <main>
+      <p class="winner"></p>
+      <div class="container">
+        <div class="player1 active">
+          <div class="player">YOUR FLEET</div>
+          <div class="left-board"></div>
+        </div>
+        <hr class="hidden" />
+        <div class="player2 inactive hidden">
+          <div class="player">OPPONENT</div>
+          <div class="right-board"></div>
+        </div>
+      </div>
+      <div class="control-btn">
+        <button class="reset">Reset</button>
+        <button class="random">Random</button>
+        <button class="start hidden">Start New Game</button>
+      </div>
+    </main>
+  </body>
+</html>
