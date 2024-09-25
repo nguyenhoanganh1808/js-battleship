@@ -38,6 +38,11 @@ describe('game board', () => {
     const newShip = Ship(3);
     board.placeShip(newShip, 0, 0);
     expect(board.placeShip(newShip, 0, 0)).toBe(false);
+    expect(board.placeShip(newShip, 1, 0)).toBe(false);
+    expect(board.placeShip(newShip, 0, 3)).toBe(false);
+    expect(board.placeShip(newShip, 0, 2)).toBe(false);
+    expect(board.placeShip(newShip, 0, 8)).toBe(false);
+    expect(board.placeShip(newShip, 2, 0)).toBe(true);
   });
 
   test('should not be place near other ship', () => {

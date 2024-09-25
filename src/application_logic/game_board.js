@@ -18,37 +18,15 @@ export default function GameBoard() {
     }
   };
 
-  const placeShipRandomOnBoard = () => {
-    const carrier = Ship(5);
-    const battleShip = Ship(4);
-    const destroyer = Ship(3);
-    const submarine = Ship(3);
-    const patrolBoat = Ship(2);
-    createBoard();
-
-    const ships = [carrier, battleShip, destroyer, submarine, patrolBoat];
-
-    ships.forEach((ship) => {
-      const { row, col } = createRandomMove();
-      const placeModes = ['horizontal', 'vertical'];
-      const randomPlaceMode = placeModes[Math.floor(Math.random() * 2)];
-
-      while (true) {
-        const result = placeShip(ship, row, col);
-        if (result === false) break;
-      }
-    });
-  };
-
   function checkPlaceShipHorizontal(ship, row, col) {
-    let shipLength = ship.getLength();
+    const shipLength = ship.getLength();
 
     if (shipLength > columns - col) {
       return false;
     }
-    const lastCol = col + shipLength;
+    const lastCol = col + shipLength - 1;
     // Check if near by row have other ship
-    for (let j = col - 1; j < lastCol + 1; j++) {
+    for (let j = col - 1; j <= lastCol + 1; j++) {
       if (j < 0) continue;
       if (
         (row - 1 >= 0 && board[row - 1][j] !== '') ||
@@ -64,7 +42,7 @@ export default function GameBoard() {
     )
       return false;
     // Check if row have other ship
-    for (let j = col; j < columns; j++) {
+    for (let j = col; j <= lastCol; j++) {
       if (board[row][j] !== '') {
         return false;
       }
@@ -73,16 +51,17 @@ export default function GameBoard() {
   }
 
   function checkPlaceShipVertical(ship, row, col) {
-    let shipLength = ship.getLength();
+    const shipLength = ship.getLength();
     if (shipLength > rows - row) {
       return false;
     }
 
-    const lastRow = row + shipLength;
+    const lastRow = row + shipLength - 1;
 
     //check if near by col have ship
-    for (let i = row - 1; i < lastRow + 1; i++) {
-      if (i < 0) continue;
+    for (let i = row - 1; i <= lastRow + 1; i++) {
+      if (i < 0 || i >= rows) continue;
+      console.log(col);
       if (
         (col - 1 >= 0 && board[i][col - 1] !== '') ||
         (col + 1 < columns && board[i][col + 1] !== '')
@@ -93,13 +72,13 @@ export default function GameBoard() {
 
     if (
       (row - 1 >= 0 && board[row - 1][col] !== '') ||
-      (row + 1 <= rows && board[row + 1][col] !== '')
+      (lastRow + 1 < rows && board[lastRow + 1][col] !== '')
     ) {
       return false;
     }
 
     //check if col have other ship
-    for (let i = row; i < rows; i++) {
+    for (let i = row; i <= lastRow; i++) {
       if (board[i][col] !== '') {
         return false;
       }
@@ -123,6 +102,32 @@ export default function GameBoard() {
       }
     }
     return true;
+  };
+
+  const placeShipRandomOnBoard = () => {
+    const carrier = Ship(5);
+    const battleShip = Ship(4);
+    const destroyer = Ship(3);
+    const submarine = Ship(3);
+    const patrolBoat = Ship(2);
+    createBoard();
+
+    const ships = [carrier, battleShip, destroyer, submarine, patrolBoat];
+
+    ships.forEach((ship) => {
+      const placeModes = ['horizontal', 'vertical'];
+      while (true) {
+        const { row, col } = createRandomMove();
+        const randomPlaceMode = placeModes[Math.floor(Math.random() * 2)];
+
+        placeMode = randomPlaceMode;
+
+        console.log(row + ' ' + col);
+        const result = placeShip(ship, row, col);
+        if (result) break;
+        console.log(result);
+      }
+    });
   };
 
   const receiveAttack = (row, col) => {

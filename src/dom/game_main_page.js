@@ -117,7 +117,7 @@ export default function ScreenController() {
   function handleRandomButton() {
     const players = gameController.getPlayers();
     players[0].gameBoard.placeShipRandomOnBoard();
-    players[1].gameBoard.placeShipRandomOnBoard();
+    // players[1].gameBoard.placeShipRandomOnBoard();
     updateBoards();
   }
 
